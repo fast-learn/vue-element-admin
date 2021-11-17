@@ -14,7 +14,7 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
     if (config.url === '/user/login' || config.url === '/user/info') {
-      config.baseURL = 'http://localhost:7001/'
+      config.baseURL = 'https://localhost/'
     }
     if (store.getters.token) {
       // let each request carry token
