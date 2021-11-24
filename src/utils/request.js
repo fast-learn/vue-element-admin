@@ -3,6 +3,10 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
+const whiteList = ['/user/login', '/user/info', '/role/getUserList', '/role/deleteUser', '/role/getRoleList',
+  '/role/addUserList', '/role/updateUser', '/role/addRole', '/role/getMenuList', '/role/getMenuRole', '/role/addUser',
+  '/role/updataRole', '/role/deleteRole', '/role/addMenu', '/role/updateMenu', '/role/deleteMenu', '/role/getUserMenu']
+
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -13,9 +17,10 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-    if (config.url === '/user/login' || config.url === '/user/info') {
-      config.baseURL = 'https://localhost/'
+    if (whiteList.indexOf(config.url) !== -1) {
+      config.baseURL = 'https://127.0.0.1:8000/'
     }
+
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
