@@ -1,7 +1,8 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
-
+// md5 加密
+import md5 from 'js-md5'
 const state = {
   token: getToken(),
   name: '',
@@ -33,7 +34,7 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
+      login({ username: username.trim(), password: md5(password) }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)

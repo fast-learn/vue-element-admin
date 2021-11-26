@@ -1,4 +1,6 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import { constantRoutes } from '@/router'
+import { getUserMenu } from '@/api/authority'
+import { setMenu, formatTree } from '../../utils/role'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -49,14 +51,22 @@ const mutations = {
 const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      getUserMenu(roles).then(res => {
+        const menu = formatTree(setMenu(res.data.menu))
+        // menu.push({ path: '*', redirect: '/404', hidden: true })
+        // const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+        // const menuList = menu.concat(accessedRoutes)
+        commit('SET_ROUTES', menu)
+        resolve(menu)
+      })
+      // let accessedRoutes
+      // if (roles.includes('admin')) {
+      //   accessedRoutes = asyncRoutes || []
+      // } else {
+      // const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+      // }
+      // commit('SET_ROUTES', accessedRoutes)
+      // resolve(accessedRoutes)
     })
   }
 }
