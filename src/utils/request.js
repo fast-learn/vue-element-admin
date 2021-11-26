@@ -3,7 +3,7 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
-const whiteList = ['/user/login', '/user/info', '/role/getUserList', '/role/deleteUser', '/role/getRoleList',
+const whiteList = ['/user/login', '/role/getUserRole', '/user/info', '/role/getUserList', '/role/deleteUser', '/role/getRoleList',
   '/role/addUserList', '/role/updateUser', '/role/addRole', '/role/getMenuList', '/role/getMenuRole', '/role/addUser',
   '/role/updataRole', '/role/deleteRole', '/role/addMenu', '/role/updateMenu', '/role/deleteMenu', '/role/getUserMenu']
 

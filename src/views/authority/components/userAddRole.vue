@@ -117,7 +117,7 @@ const fields = {
   password: '密码',
   nickname: '用户昵称'
 }
-import { getRoleList, updateUser, addUserList } from '../../../api/authority'
+import { getRoleList, updateUser, addUserList, getUserRole } from '../../../api/authority'
 export default {
   name: 'UserRoleAdd',
   // eslint-disable-next-line vue/require-prop-types
@@ -245,6 +245,13 @@ export default {
     init() {
       if (this.userData) {
         const oldData = JSON.parse(JSON.stringify(this.userData))
+        const roleList = []
+        getUserRole({ id: this.userData.id }).then((params) => {
+          params.data.map((item) => {
+            roleList.push(item)
+          })
+        })
+        oldData.role = roleList
         if (typeof oldData.role !== 'object') {
           if (typeof oldData.role === 'string') {
             if (oldData.role.indexOf(',') !== -1) {

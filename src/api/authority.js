@@ -11,6 +11,13 @@ export function getUserRoleList(query) {
   })
 }
 
+export function getUserRole(query) {
+  return request({
+    url: '/role/getUserRole',
+    method: 'get',
+    params: query
+  })
+}
 // 删除用户接口
 export function deleteUser(query) {
   return request({
