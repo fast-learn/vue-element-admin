@@ -18,7 +18,7 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
     if (whiteList.indexOf(config.url) !== -1) {
-      config.baseURL = 'https://127.0.0.1:8000/'
+      config.baseURL = 'https://localhost:8000/'
     }
 
     if (store.getters.token) {

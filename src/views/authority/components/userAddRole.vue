@@ -1,7 +1,7 @@
 <template>
   <div class="addUser">
     <el-dialog
-      :title="userData ? '编辑角色' : '新增角色'"
+      :title="userData ? '编辑用户' : '新增用户'"
       :visible.sync="dialogVisible"
       width="60%"
       center
@@ -19,7 +19,7 @@
       >
         <el-row :gutter="40">
           <el-col :span="12">
-            <el-form-item label="用户姓名" prop="username">
+            <el-form-item label="用户名" prop="username">
               <el-input v-model="form.username" placeholder="请输入用户姓名" />
             </el-form-item>
           </el-col>
@@ -27,6 +27,7 @@
             <el-form-item label="用户密码" prop="password">
               <el-input
                 v-model="form.password"
+                :disabled="!!userData"
                 show-password
                 type="password"
                 placeholder="请输入用户密码"
@@ -56,6 +57,7 @@
               <span v-if="!form.avatar && userData">暂无用户头像</span>
               <el-upload
                 ref="upload"
+                :class="{disabled:form.avatar}"
                 :action="action"
                 list-type="picture-card"
                 :on-preview="handlePictureCardPreview"
@@ -115,7 +117,7 @@ const fields = {
   password: '密码',
   nickname: '用户昵称'
 }
-import { getRoleList, updateUser, addUserList } from '../../../api/role1'
+import { getRoleList, updateUser, addUserList } from '../../../api/authority'
 export default {
   name: 'UserRoleAdd',
   // eslint-disable-next-line vue/require-prop-types
@@ -129,7 +131,7 @@ export default {
       }
     }
     return {
-      action: `https://localhost:8000/role/addUserAvatar`,
+      action: `https://fast-learn.youbaobao.xyz:8000/role/addUserAvatar`,
       dialogImageUrl: '',
       dialogVisible: false,
       fileList: [], // 存放文件位置
@@ -258,10 +260,11 @@ export default {
           // 清空上传的图片
           this.$refs['upload'].clearFiles()
         }
+
         if (this.form.avatar) {
           this.fileList = []
           const newUlr = { url: oldData.avatar }
-          this.fileList.push(newUlr)
+          this.fileList = [newUlr]
         }
       }
     },
@@ -323,4 +326,10 @@ export default {
   text-align: center;
   margin-top: 30px;
 }
+.disabled {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+
 </style>

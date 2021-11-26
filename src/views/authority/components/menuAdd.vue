@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { getMenuList, addMenu, updateMenu } from '../../../api/role1'
+import { getMenuList, addMenu, updateMenu } from '../../../api/authority'
 const fields = {
   name: '菜单名称',
   url: 'URL',

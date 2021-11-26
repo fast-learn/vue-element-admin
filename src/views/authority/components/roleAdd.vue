@@ -57,7 +57,7 @@ import {
   getMenuRole,
   addRole,
   updataRole
-} from '../../../api/role1'
+} from '../../../api/authority'
 import { formatTree } from '../../../utils/role'
 
 const fields = {

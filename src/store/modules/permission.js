@@ -1,5 +1,5 @@
 import { constantRoutes } from '@/router'
-import { getUserMenu } from '@/api/role1'
+import { getUserMenu } from '@/api/authority'
 import { setMenu, formatTree } from '../../utils/role'
 
 /**
@@ -53,7 +53,7 @@ const actions = {
     return new Promise(resolve => {
       getUserMenu(roles).then(res => {
         const menu = formatTree(setMenu(res.data.menu))
-        menu.push({ path: '*', redirect: '/404', hidden: true })
+        // menu.push({ path: '*', redirect: '/404', hidden: true })
         // const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
         // const menuList = menu.concat(accessedRoutes)
         commit('SET_ROUTES', menu)

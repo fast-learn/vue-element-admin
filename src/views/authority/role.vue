@@ -44,6 +44,7 @@
             </RoleFormDialog>
           </div>
           <el-button
+            v-if="row.name != 'administrators'"
             type="text"
             icon="el-icon-delete"
             style="color:#f56c6c"
@@ -56,7 +57,7 @@
 </template>
 
 <script>
-import { getRoleList, deleteRole } from '../../api/role1'
+import { getRoleList, deleteRole } from '../../api/authority'
 import RoleFormDialog from './components/roleAdd'
 export default {
   name: 'Role',
@@ -115,7 +116,7 @@ export default {
     },
     refresh() {
       this.$router.push({
-        path: '/jurisdiction/role',
+        path: '/authority/role',
         query: this.listQuery
       })
     },
@@ -163,6 +164,8 @@ export default {
   .title{
     margin-bottom:30px;
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 </style>

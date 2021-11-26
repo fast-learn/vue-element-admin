@@ -16,10 +16,7 @@ export function isExternal(path) {
  */
 export function validUsername(str) {
   // const valid_map = ['testuser', 'admin', 'editor', 'sam']
-  if (str.length > 1) {
-    return true
-  }
-  return false
+  return str.length > 1
 }
 
 /**

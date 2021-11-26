@@ -1,5 +1,22 @@
 // cover some element-ui styles
 
+.menuTable{
+  .el-table__row--level-1{
+    .el-table_1_column_1 .cell{
+      margin-left:10px;
+    }
+  }
+  .el-table__row--level-2{
+    .el-table_1_column_1 .cell{
+      margin-left:25px;
+    }
+  }
+  .el-table__row--level-3{
+    .el-table_1_column_1 .cell{
+      margin-left:40px;
+    }
+  }
+}
 .el-breadcrumb__inner,
 .el-breadcrumb__inner a {
   font-weight: 400 !important;

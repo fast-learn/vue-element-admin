@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { getMenuList, deleteMenu } from '../../api/role1'
+import { getMenuList, deleteMenu } from '../../api/authority'
 import { formatTree } from '../../utils/role'
 import MenuAdd from './components/menuAdd'
 export default {
@@ -192,7 +192,7 @@ export default {
     },
     refresh() {
       this.$router.push({
-        path: '/jurisdiction/menuRole',
+        path: '/authority/menuRole',
         query: this.listQuery
       })
     },
@@ -226,6 +226,9 @@ export default {
   .title {
     margin-bottom: 30px;
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
   }
 }
+
 </style>

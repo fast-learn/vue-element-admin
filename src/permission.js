@@ -38,7 +38,16 @@ router.beforeEach(async(to, from, next) => {
           // generate accessible routes map based on roles
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
           // dynamically add accessible routes
-          router.addRoutes(accessRoutes)
+          // ,
+          console.log(accessRoutes, 99)
+          // 将未识别到的页面重定向到404
+          const newaccessRoutes = accessRoutes.concat([
+            {
+              path: '/404',
+              component: () => import('@/views/error-page/404'),
+              hidden: true
+            }, { path: '*', redirect: '/404', hidden: true }])
+          router.addRoutes(newaccessRoutes)
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })

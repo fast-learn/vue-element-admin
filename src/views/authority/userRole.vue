@@ -128,7 +128,7 @@
 <script>
 import Pagination from '../../components/Pagination/index'
 import waves from '../../directive/waves/waves'
-import { getUserRoleList, deleteUser } from '../../api/role1'
+import { getUserRoleList, deleteUser } from '../../api/authority'
 import userRoleAdd from './components/userAddRole'
 export default {
   name: 'UserRole',
@@ -169,7 +169,13 @@ export default {
     getList(data) {
       this.listLoading = true
       getUserRoleList(this.listQuery).then(response => {
-        this.list = response.data.list
+        const newList = []
+        response.data.list.map((item) => {
+          if (item.status !== '0') {
+            newList.push(item)
+          }
+        })
+        this.list = newList
         this.total = response.data.count
         if (
           this.listQuery.page * this.listQuery.pageSize >
@@ -191,7 +197,7 @@ export default {
     // 将参数写在路由地址中
     refresh() {
       this.$router.push({
-        path: '/jurisdiction/userRole',
+        path: '/authority/userRole',
         query: this.listQuery
       })
     },
@@ -289,4 +295,5 @@ export default {
     height: 100px !important;
   }
 }
+
 </style>
